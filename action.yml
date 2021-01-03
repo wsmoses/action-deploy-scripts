@@ -1,0 +1,51 @@
+name: Deploy to MIT scripts
+author: wsmoses
+description: Github Action to deploy a folder to MIT Scripts using SSH
+inputs:
+  locker:
+    description: "Athena locker being deployed into."
+    required: true
+  local:
+    description: "Path to the local folder you want to copy."
+    required: true
+    default: "."
+  remote:
+    description: "Path on the remote server to copy to."
+    required: true
+    default: "."
+  dotfiles:
+    description: "Determines if files with  leading dot (.) on folder copy is included"
+    required: false
+    default: true
+  dotgit:
+    description: "Determines if .git files are included"
+    required: false
+    default: false
+  rmRemote:
+    description: "If it is a directory, remote files in it will be deleted before the copy is started."
+    default: false
+  concurrency:
+    description: "Number of concurrent file transfers."
+    required: false
+    default: 1
+  recursive:
+    description: "Wether copy of directory should be recursive"
+    required: false
+    default: true
+  verbose:
+    description: "Log status of every file copy"
+    required: false
+    default: false
+  kill:
+    description: "Kill existing scripts processes that are running (potentially old code)"
+    required: false
+    default: true
+  privateKey:
+    description: "File Location or string that contains a private key for either key-based or hostbased user authentication (OpenSSH format)"
+    required: true
+runs:
+  using: "node12"
+  main: "index.js"
+branding:
+  color: "purple"
+  icon: "copy"
